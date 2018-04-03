@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>MD4. This is a scene. There are mammals and vegetation.</title>
+    <style>
+        body { margin: 0;  overflow: hidden}
+        canvas { width: 100%; height: 100% }
+    </style>
+</head>
+<body>
+<script src = "three.min.js"></script>
+<script src = "OrbitControls.js"></script>
+<script src = "GLTFLoader.js"></script>
+<script src = "DragControls.js"></script>
+<script src = "stats.min.js"></script>
+<script src = "StereoEffect.js"></script>
+
+<script>
+
+ //initializing scene, camera, renderer
+	var objects = [];
+	var scene = new THREE.Scene();
+	var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );	
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	
+//resize scaling	
+	window.addEventListener('resize', function() 
+{
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	renderer.setSize(width, height);
+	camera.aspect = width/height;	
+	camera.updateProjectionMatrix();
+});
+
+
+//	var orbitcontrols = new THREE.OrbitControls(camera, renderer.domEelement); //add orbit controls		
+
+	var effect = new THREE.StereoEffect(renderer); //3d screen split
+  
+//lights
+
+	var light = new THREE.HemisphereLight( 0xFFFFFF, 0x080820, 2 );
+		scene.add( light );
+//
+
+//adding gltf objects
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Tree.gltf',
+	// called when the resource is loaded
+	function ( tree ) {
+	
+		tree.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( tree.scene );	
+		tree.scene.scale.set( 0.002, 0.002, 0.002 );
+		tree.scene.position.set( 0.7, 0, 0.7 );
+		objects.push(tree.scene);
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Grass.gltf',
+	// called when the resource is loaded
+	function ( grass1 ) {
+	
+		grass1.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( grass1.scene );
+		grass1.scene.scale.set( 0.2, 0.2, 0.2 );
+		grass1.scene.position.set( 0.5, 0.068, 0.5 );
+
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Grass.gltf',
+	// called when the resource is loaded
+	function ( grass2 ) {
+
+		grass2.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );	
+		scene.add( grass2.scene );
+		grass2.scene.scale.set( 0.2, 0.2, 0.2 );
+		grass2.scene.position.set( 0.75, 0.068, 0.3 );
+
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Grass.gltf',
+	// called when the resource is loaded
+	function ( grass3 ) {
+
+		grass3.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );	
+		scene.add( grass3.scene );
+		grass3.scene.scale.set( 0.2, 0.2, 0.2 );
+		grass3.scene.position.set( -0.6, 0.068, 0.6 );
+
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'AppleTree.gltf',
+	// called when the resource is loaded
+	function ( appletree ) {
+		appletree.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( appletree.scene );
+		appletree.scene.scale.set( 0.5, 0.5, 0.5 );
+		appletree.scene.position.set( -0.7, 0.55, 0.6 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Rock.gltf',
+	// called when the resource is loaded
+	function ( rock ) {
+		rock.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( rock.scene );
+		rock.scene.scale.set( 0.002, 0.002, 0.002 );
+		rock.scene.position.set( -0.5, -0.1, -0.6 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Grass.gltf',
+	// called when the resource is loaded
+	function ( grass4 ) {
+		grass4.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( grass4.scene );
+		grass4.scene.scale.set( 0.2, 0.2, 0.2 );
+		grass4.scene.position.set( -0.45, 0.068, -0.62 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Grass.gltf',
+	// called when the resource is loaded
+	function ( grass5 ) {
+		grass5.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( grass5.scene );
+		grass5.scene.scale.set( 0.2, 0.2, 0.2 );
+		grass5.scene.position.set( 0.4, 0.068, -0.55 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Fence.gltf',
+	// called when the resource is loaded
+	function ( fence) {
+		fence.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( fence.scene );
+		fence.scene.scale.set( 0.000145, 0.000135, 0.000135 );
+		fence.scene.position.set( 2.25, 0.02, -1.02 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Fence.gltf',
+	// called when the resource is loaded
+	function ( fence2 ) {
+		fence2.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( fence2.scene );
+		fence2.scene.scale.set( 0.000145, 0.000135, 0.000135 );
+		fence2.scene.position.set( 2.25, 0.02, 0.94 );
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Fence.gltf',
+	// called when the resource is loaded
+	function ( fence3 ) {
+		fence3.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( fence3.scene );
+		fence3.scene.scale.set( 0.000145, 0.000135, 0.000135 );
+		fence3.scene.position.set( 0.95, 0.02, -2.26 );
+		fence3.scene.rotation.y = Math.PI / 2;
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Fence.gltf',
+	// called when the resource is loaded
+	function ( fence4 ) {
+		fence4.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( fence4.scene );
+		fence4.scene.scale.set( 0.000145, 0.000135, 0.000135 );
+		fence4.scene.position.set( -1.02, 0.02, -2.26 );
+		fence4.scene.rotation.y = Math.PI / 2;
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Cow.gltf',
+	// called when the resource is loaded
+	function ( cow ) {
+		cow.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( cow.scene );
+		cow.scene.scale.set( 0.04, 0.04, 0.04 );
+		cow.scene.position.set( -0.1, 0.01, 0 );
+		cow.scene.rotation.y = 45;
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Sheep.gltf',
+	// called when the resource is loaded
+	function ( sheep ) {
+		sheep.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( sheep.scene );
+		sheep.scene.scale.set( 0.15, 0.15, 0.15 );
+		sheep.scene.position.set( -0.3, 0.15, 0.6 );
+		sheep.scene.rotation.y = 54.5;
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'Goat.gltf',
+	// called when the resource is loaded
+	function ( goat ) {
+		goat.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( goat.scene );
+		goat.scene.scale.set( 0.002, 0.002, 0.002 );
+		goat.scene.position.set( 0.4, 0.17, 0.5 );
+		goat.scene.rotation.y = 52;
+		objects.push(goat.scene);
+
+	},
+);
+//
+var loader = new THREE.GLTFLoader();
+loader.load(
+
+	'BigSheep.gltf',
+	// called when the resource is loaded
+	function ( bigsheep ) {
+		bigsheep.scene.traverse(  (object) => {
+
+		if ( object.isMesh ) objects.push( object );
+
+		} );
+		scene.add( bigsheep.scene );
+		bigsheep.scene.scale.set( 0.05, 0.05, 0.05 );
+		bigsheep.scene.position.set( 0.6, 0, -0.4 );
+		bigsheep.scene.rotation.y = 55.5;
+		objects.push(bigsheep.scene);
+
+	},
+);
+
+//the material plane
+
+var geometry = new THREE.PlaneGeometry( 2, 2, 2 );
+var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/grasstexture.jpg'), side: THREE.DoubleSide});
+var plane = new THREE.Mesh( geometry, material );
+plane.rotation.x = Math.PI / 2;
+scene.add( plane );
+objects.push(plane);
+//
+
+	var controls = new THREE.DragControls( objects, camera, renderer.domElement );
+
+//skybox scenery
+	var c1geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
+	var cubeMaterials =
+[
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_ft.png'), side: THREE.DoubleSide}), //front
+
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_bk.png	'), side: THREE.DoubleSide}), //back
+																
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_up.png'), side: THREE.DoubleSide}), //top 
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_dn.png'), side: THREE.DoubleSide}), //bottom 
+	
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_rt.png'), side: THREE.DoubleSide}), //right 
+
+	new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'textures/morning_lf.png'), side: THREE.DoubleSide}), //left
+
+];
+
+	var material = new THREE.MeshFaceMaterial( cubeMaterials );
+	var skysphere = new THREE.Mesh( c1geometry, material );
+		scene.add( skysphere );
+		
+	camera.position.z = 3; //adjust camera	
+	camera.position.y = 1;
+
+	
+	var stats = new Stats();
+	stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+	document.body.appendChild( stats.dom );
+
+//scene logic, for cube, glow sphere, an skybox
+	var update = function()
+{
+	skysphere.rotation.x += 0;
+	skysphere.rotation.y += -0.0005;
+
+};
+
+//draw scene
+	var render = function()
+{	
+	effect.render(scene, camera);	
+};
+
+//console.log(object);
+
+
+// run scene loop (update, render, repeat)
+	var animate = function()
+{
+
+	stats.begin();
+	// monitored code goes here
+	stats.end();
+	requestAnimationFrame( animate );
+	
+	update();
+	render();
+};
+
+		animate();
+
+
+</script>
+</body>
+</html>
